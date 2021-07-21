@@ -1,4 +1,8 @@
+require("dotenv").config();
+
 const puppeteer = require("puppeteer");
+const USERNAME = process.env.USERNAME;
+console.log(process.env.USERNAME);
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
@@ -12,5 +16,7 @@ const puppeteer = require("puppeteer");
 
   await page.goto("https://twitter.com/login", { waitUntil: "networkidle2" });
 
-  //
+  await page.type('input[name="session[username_or_email]"]', USERNAME, {
+    delay: 25,
+  });
 })();
